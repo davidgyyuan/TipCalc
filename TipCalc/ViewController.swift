@@ -39,6 +39,10 @@ class ViewController: UIViewController {
             cusPer = 25
         }
         tipControl.setTitle("\(cusPer)%", forSegmentAt: 3)
+        tipControl.selectedSegmentIndex = defaults.integer(forKey: "segIndex")
+        if defaults.double(forKey: "bill")>0{
+        billField.text = String(defaults.double(forKey: "bill"))
+        }
         update()
     }
     override func didReceiveMemoryWarning() {
@@ -64,6 +68,8 @@ class ViewController: UIViewController {
         
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total/Double(splitLabel.text!)!)
+        let defaults = UserDefaults.standard
+        defaults.set(Double(billField.text!), forKey: "bill")
 
     }
     

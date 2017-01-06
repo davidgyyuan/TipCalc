@@ -27,13 +27,20 @@ class SettingsViewController: UIViewController {
         defaults.set(Double(field.text!) ?? 0, forKey: "customPercent")
         defaults.synchronize()
     }
+    @IBOutlet weak var seg: UISegmentedControl!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let defaults = UserDefaults.standard
         if defaults.double(forKey: "customPercent") > 0 {
             field.text = String(defaults.double(forKey: "customPercent"))
         }
+        seg.selectedSegmentIndex = defaults.integer(forKey: "segIndex") 
         
+    }
+    @IBAction func dechanged(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(seg.selectedSegmentIndex, forKey: "segIndex")
+
     }
     /*
     // MARK: - Navigation
